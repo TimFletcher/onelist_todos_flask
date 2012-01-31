@@ -1,0 +1,25 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body_id %}login{% endblock %}
+
+{% block body %}
+  <div id="container">
+    <h1>Login</h1>
+    {% if form.errors.form_errors %}
+      <p id="form-level-error" class="rounded-2">{{ form.errors.form_errors }}</p>
+    {% endif %}
+    {% from "_formhelpers.html" import render_field %}
+    <form action="" method="POST" accept-charset="utf-8" id="login-form" class="clearfix onelist-form" novalidate="novalidate">
+        {{ render_field(form.email, autocapitalize="off", autocorrect="off") }}
+        {{ render_field(form.password) }}
+        <input type="submit" value="Login" id="submit" class="rounded-3">
+    </form>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  <a href="{{ url_for('accounts.password_reset_request') }}" class="forget">forget?</a> &bull;
+  <a href="{{ url_for('accounts.register') }}" class="forget">I'm new here</a>
+{% endblock %}

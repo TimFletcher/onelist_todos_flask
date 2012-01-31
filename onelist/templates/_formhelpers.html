@@ -1,0 +1,13 @@
+{% macro render_field(field) %}
+  <label for="{{ field.id }}" class="input rounded-3 {{ classes }}">
+    <span>{{ field.label.text }}</span>
+    {{ field(**kwargs)|safe }}
+    {% if field.errors %}
+        <ul class="fieldError rounded-2">
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+  </label>
+{% endmacro %}

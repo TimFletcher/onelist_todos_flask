@@ -1,0 +1,110 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]--> 
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]--> 
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]--> 
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]--> 
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]--> 
+<head> 
+  <meta charset="utf-8"> 
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess --> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Onelist | {% block title %}The Simple Todo List App{% endblock %}</title>
+  <meta name="description" content="Just one todo list">
+  <meta name="author" content="Tim Fletcher">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <link rel="shortcut icon" href="{{ url_for('.static', filename='favicon.ico') }}" />
+  <link rel="apple-touch-icon" href="{{ url_for('.static', filename='apple-touch-icon.png') }}">
+  <link rel="stylesheet" href="{{ url_for('.static', filename='css/style.css')}}">
+  <!--<link rel="apple-touch-startup-image" href="images/startup.png">-->
+  {# <script src="{{ url_for('.static', filename='js/libs/modernizr-1.7.min.js') }}"></script> #}
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-22647977-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+
+<body class="{% block body_class %}base{% endblock %}" id="{% block body_id %}base{% endblock %}">
+  {% block header %}
+    <header>
+      <a href="/" class="logo">OneList</a>
+      {% if g.user.is_authenticated %}
+        <nav id="header-nav" class="header-nav">
+          <p href="#" id="toggle-nav"><span>{{ g.user.email }}</span></p>
+          <a href="{{ url_for('lists.list') }}">Your List</a>
+          <a href="{{ url_for('lists.add_item_via_hash', hash=g.user['hash']) }}">Private Add Page</a>
+          <a href="{{ url_for('accounts.password_change') }}">Change Password</a>
+          <a href="{{ url_for('accounts.logout') }}">Logout</a>
+        </nav>
+      {% endif %}
+    </header>
+  {% endblock %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul id="flash-messages">
+        {% for category, message in messages %}
+          <li class="message-{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <div id="container">
+    {% block body %}
+      <div id="main"></div>
+    {% endblock %}
+    <footer>
+      {% block footer %}A webapp by <a href="http://timothyfletcher.com">Tim Fletcher</a> &bull;
+      <script type="text/javascript">
+      //<![CDATA[
+      <!--
+      var x="function f(x){var i,o=\"\",l=x.length;for(i=0;i<l;i+=2) {if(i+1<l)o+=" +
+      "x.charAt(i+1);try{o+=x.charAt(i);}catch(e){}}return o;}f(\"ufcnitnof x({)av" +
+      " r,i=o\\\"\\\"o,=l.xelgnhtl,o=;lhwli(e.xhcraoCedtAl(1/)3=!96{)rt{y+xx=l;=+;" +
+      "lc}tahce({)}}of(r=i-l;1>i0=i;--{)+ox=c.ahAr(t)i};erutnro s.buts(r,0lo;)f}\\" +
+      "\"(9),7\\\"\\\\COXIQR17\\\\01\\\\h!uihiEb6+0O-Mbjey77\\\\1*\\\\T+eht+cssu27" +
+      "\\\\01\\\\02\\\\\\\\31\\\\05\\\\02\\\\\\\\25\\\\09\\\\14\\\\05\\\\00\\\\\\\\"+
+      "31\\\\05\\\\00\\\\\\\\04\\\\06\\\\00\\\\\\\\01\\\\0K\\\\37\\\\03\\\\03\\\\\\"+
+      "\\02\\\\04\\\\00\\\\\\\\\\\\r6\\\\00\\\\\\\\5H1U00\\\\\\\\03\\\\07\\\\02\\\\"+
+      "\\\\14\\\\0C\\\\03\\\\0]\\\\wB10/9+3y/\\\"\\\\\\\\\\\\1;'>?2\\\\+(\\\"}fo;n" +
+      " uret}r);+)y+^(i)t(eAodrCha.c(xdeCoarChomfrg.intr=So+7;12%=;y=iy+9)=7i=f({i" +
+      "+)i+l;i<0;i=r(foh;gten.l=x,l\\\"\\\\\\\"\\\\o=i,r va){,y(x fontincfu)\\\"\"" +
+      ")"                                                                           ;
+      while(x=eval(x));
+      //-->
+      //]]>
+      </script>
+      {% endblock %}
+    </footer>
+  </div>
+
+  {% block modals %}{% endblock %}
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/static/js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+
+  <!-- scripts concatenated and minified via ant build script-->
+  <script src="{{ url_for('.static', filename='js/plugins.js') }}"></script>
+  <script src="{{ url_for('.static', filename='js/script.js') }}"></script>
+  <!-- end concatenated and minified scripts--> 
+
+  <!--[if lt IE 7 ]>
+    <script src="{{ url_for('.static', filename='js/libs/dd_belatedpng.js') }}"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]--> 
+
+</body>
+</html>

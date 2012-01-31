@@ -1,0 +1,17 @@
+{% extends 'errors/base.html' %}
+
+{% block title %}500 Server Error{% endblock %}
+
+{% block body_id %}500{% endblock %}
+
+{% block error_title %}500 Server Error{% endblock %}
+
+{% block error_content %}
+  Oops. There was some problem with the website. We'll look into it right away.
+  In the mean time maybe you should try 
+  {% if g.user.is_authenticated %}
+    your <a href="{{ url_for('lists.list') }}">list</a> page.
+  {% else %}
+    the <a href="{{ url_for('pages.homepage') }}">Homepage</a>.
+  {% endif %}
+{% endblock %}

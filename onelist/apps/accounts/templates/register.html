@@ -1,0 +1,31 @@
+{% extends "accounts/base.html" %}
+
+{% block body_id %}register{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+  <div id="container">
+    <h1>Register</h1>
+    {% if g.user.is_anonymous %}
+      {% if form.errors.form_errors %}
+        <p id="form-level-error">{{ form.errors.form_errors }}</p>
+      {% endif %}
+      {% from "_formhelpers.html" import render_field %}
+      <form action="" method="POST" accept-charset="utf-8" id="registration-form" class="clearfix onelist-form" novalidate="novalidate">
+          {{ render_field(form.email, autocapitalize="off", autocorrect="off") }}
+          {{ render_field(form.password) }}
+          {{ render_field(form.confirm) }}
+          <input type="submit" value="Register" id="submit" class="rounded-3">
+      </form>
+    {% else %}
+      <div id="content" class="transparent rounded-6">
+        <p class="no-margin">
+          You're already registered and logged in as <span>{{ g.user.email }}</span>.<br />If you want to register
+          another account you'll need to <a href="{{ url_for('accounts.logout') }}">logout</a> first.</p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

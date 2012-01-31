@@ -1,0 +1,11 @@
+<form action="{{ url_for('lists.add_item') }}" method="post" accept-charset="utf-8" id="todo-add-form" class="clearfix rounded-6">
+  <input type="hidden" name="hash" value="{{ hash }}" id="hash">
+  <div id="textarea-wrapper">
+    <div class="rounded-4">
+      <textarea id="todo-add-textarea" name="text-add"></textarea>
+    </div>
+  </div>
+  <div id="submit-wrapper">
+    <input type="submit" name="submit" value="Add" class="rounded-4">
+  </div>
+</form>

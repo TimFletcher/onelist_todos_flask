@@ -1,0 +1,20 @@
+{% extends "pages/base.html" %}
+
+{% block body_id %}homepage{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block body %}
+  <div id="homepage-container" class="clearfix">
+    <p class="logo rounded-3" id="homepage-logo">OneList</p>
+    <div id="content" class="transparent rounded-6">
+      <p class="no-margin">OneList is a really simple todo list application. You have just one list.
+        There are no priorities, no ordering and no due by dates, just super-quick
+        adding, editing and removing of list items.</p>
+    </div>
+    <a href="{{ url_for('accounts.login') }}" class="homepage-button museo rounded-6 box-shadow" id="login-button">Log In</a>
+    <a href="{{ url_for('accounts.register') }}" class="homepage-button museo rounded-6 box-shadow" id="register-button">Sign Up</a>
+  </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

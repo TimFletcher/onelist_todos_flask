@@ -1,0 +1,15 @@
+{% extends "lists/base.html" %}
+
+{% block body_id %}add{% endblock %}
+
+{% block title %}Private Add Page{% endblock %}
+
+{% block body %}
+<div id="container">
+  <h1>Private Add Page</h1>
+  <div id="content" class="transparent rounded-6">
+    <p class="no-margin">Bookmark this page to add items to your list quickly and easily without being logged in.</p>
+  </div>
+  {% include "lists/_add_form.html" %}
+</div>
+{% endblock %}

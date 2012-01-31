@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body_class %}error{% endblock %}
+
+{% block body %}
+  <div id="container">
+    <h1>{% block error_title %}{% endblock %}</h1>
+    <div id="content" class="transparent rounded-6">
+      <p class="no-margin">
+        {% block error_content %}{% endblock %}
+      </p>
+    </div>
+  </div>
+{% endblock %}

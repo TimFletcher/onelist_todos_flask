@@ -1,0 +1,5 @@
+*.sqlite3
+*.pyc
+onelist/logs/*.log
+.eprj
+pip-log.txt

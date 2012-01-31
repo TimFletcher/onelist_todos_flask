@@ -1,0 +1,16 @@
+{% extends 'errors/base.html' %}
+
+{% block title %}404 Not Found{% endblock %}
+
+{% block body_id %}404{% endblock %}
+
+{% block error_title %}404 Not Found{% endblock %}
+
+{% block error_content %}
+  Oops. You've requested a page that doesn't exist. Maybe should try
+  {% if g.user.is_authenticated %}
+    your <a href="{{ url_for('lists.list') }}">list</a> page.
+  {% else %}
+    the <a href="{{ url_for('pages.homepage') }}">Homepage</a>.
+  {% endif %}
+{% endblock %}

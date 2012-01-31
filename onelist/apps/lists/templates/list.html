@@ -1,0 +1,44 @@
+{% extends "lists/base.html" %}
+
+{% block body_id %}list{% endblock %}
+
+{% block title %}Your List{% endblock %}
+
+{% block body %}
+  <div id="todo-list-container">
+    <ul id="todo-item-list" class="rounded-6 box-shadow">
+      {% for item in items %}
+        <li id="item-{{item.id}}"{% if item.complete %} class="checked-off"{% endif %}>
+          <a href="#" {% if item.complete %}style="display: block;"{% endif %} class="action-button delete rounded-3" data-id="{{item.id}}" data-url="{{ url_for('lists.delete_item', item_id=item.id) }}">Delete</a>
+          <input type="checkbox" class="checkoff"{% if item.complete %} checked=checked{% endif %} data-id="{{item.id}}" data-url="{{ url_for('lists.checkoff_item', item_id=item.id) }}">
+          <textarea id="item-{{item.id}}-text" name="text-{{item.id}}" data-id="{{item.id}}" data-url="{{ url_for('lists.edit_item', item_id=item.id) }}">{{ item.text }}</textarea>
+        </li>
+      {% endfor %}
+    </ul>
+    <form action="{{ url_for('lists.add_item') }}" method="post" accept-charset="utf-8" id="todo-add-form" class="clearfix rounded-6">
+      <div id="textarea-wrapper">
+        <div class="rounded-4">
+          <textarea id="todo-add-textarea" name="text-add"></textarea>
+        </div>
+      </div>
+      <div id="submit-wrapper">
+        <input type="submit" name="submit" value="Add" class="rounded-4">
+      </div>
+    </form>
+  </div>
+{% endblock %}
+
+{% block modals %}
+  <div id="modal-keyboard-shortcuts" class="modal rounded-6">
+    <ul id="key-commands">
+      <li><strong>up arrow</strong> : Previous list item</li>
+      <li><strong>down arrow</strong> : Next list item</li>
+      <li><strong>enter</strong> : Save item and move to next</li>
+      <li><strong>command / ctrl + delete</strong> : Delete item</li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {{ super() }} &bull; <a href="#modal-keyboard-shortcuts" id="show-modal-keyboard-shortcuts">Keyboard Shortcuts</a>
+{% endblock %}

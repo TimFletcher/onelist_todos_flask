@@ -1,0 +1,16 @@
+{% extends 'errors/base.html' %}
+
+{% block title %}403 Forbidden{% endblock %}
+
+{% block body_id %}403{% endblock %}
+
+{% block error_title %}403 Forbidden{% endblock %}
+
+{% block error_content %}
+  You're not allowed to access this page. Maybe you should try
+  {% if g.user.is_authenticated %}
+    your <a href="{{ url_for('lists.list') }}">list</a> page.
+  {% else %}
+    the <a href="{{ url_for('pages.homepage') }}">Homepage</a>.
+  {% endif %}
+{% endblock %}

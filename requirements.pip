@@ -1,0 +1,6 @@
+Flask
+Flask-Testing
+wtforms
+MySQLdb
+
+git+git://github.com/themartorana/python-postmark.git
